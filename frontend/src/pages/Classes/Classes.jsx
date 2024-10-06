@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 import useAxiosFetch from '../../../hooks/useAxiosFetch';
+import { Transition } from '@headlessui/react'
+
 
 const Classes = () => {
   const[classes, setClasses]=useState([]);
@@ -35,6 +37,18 @@ const Classes = () => {
               <div className='relative h-48'>
                 <div className={`absolute inset-0 bg-black opacity-0 transition-opacity duration-300 ${hoveredCard==index ? "opacity-60" : ""}`}/>
                 <img src={cls.image} alt="" className='object-cover w-full h-full' />
+                <Transition 
+                show={hoveredCard===index}
+                enter='transition-opacity duration-300'
+                enterFrom='opacity-0'
+                enterTo='opacity-100'
+                Leave='transition-opacity duration-300'
+                LeaveFrom='opacity-100'
+                LeaveTo='opacity-0'
+                >
+                    i will fade in out
+                </Transition>
+
 
               </div>
             </div>
