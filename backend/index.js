@@ -153,7 +153,7 @@ async function run() {
               skills: updatedUser.skills ? updatedUser.skills : null,
           }
       }
-      const result = await userCollection.updateOne(filter, updateDoc, options);
+      const result = await usersCollection.updateOne(filter, updateDoc, options);
       res.send(result);
     })
 
@@ -369,6 +369,11 @@ async function run() {
               }
           },
           {
+            $match: {
+              "instructor.role": "instructor",
+            }
+          },
+          {
               $project: {
                   _id: 0,
                   instructor: {
@@ -396,7 +401,7 @@ async function run() {
       // Get approved classes and pending classes and instructors 
       const approvedClasses = (await classesCollection.find({ status: 'approved' }).toArray()).length;
       const pendingClasses = (await classesCollection.find({ status: 'pending' }).toArray()).length;
-      const instructors = (await userCollection.find({ role: 'instructor' }).toArray()).length;
+      const instructors = (await usersCollection.find({ role: 'instructor' }).toArray()).length;
       const totalClasses = (await classesCollection.find().toArray()).length;
       const totalEnrolled = (await enrolledCollection.find().toArray()).length;
       // const totalRevenue = await paymentCollection.find().toArray();
@@ -477,48 +482,8 @@ async function run() {
 
 
 
-
-
-
-
-
-
-
-
-        
-
-
-      
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
-        
+    
   
-  
-
-
-
-
-
-
 
 
     // Send a ping to confirm a successful connection
