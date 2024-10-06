@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import useAxiosFetch from '../../../hooks/useAxiosFetch';
 import { Transition } from '@headlessui/react'
+import { Link } from 'react-router-dom';
 
 
 const Classes = () => {
@@ -21,7 +22,7 @@ const Classes = () => {
   return (
     <div>
       <div className='mt-20 pt-3'>
-        <h1 className='text-4xl font-bold text-center text-primary'>Classes</h1>
+        <h1 className='text-4xl font-bold text-center text-secondary'>Classes</h1>
       </div>
 
       <div className='my-16 w-[90%] mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'> 
@@ -30,7 +31,7 @@ const Classes = () => {
             <div
             onMouseLeave={() => handleHover(null)}
             key={index}
-            className={`relative hover:-translate-y-2 duration-150 hover:ring-[2px] hover:ring-secondary w-64 h-[350px] mx-auto ${cls.availableSeats < 1 ? 'bg-red-300' : 'bg-white'} dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer`}
+            className={`relative hover:-translate-y-2 duration-150 hover:ring-[2px] h-[400px] hover:ring-secondary w-64 mx-auto ${cls.availableSeats < 1 ? 'bg-red-300' : 'bg-white'} dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer`}
             onMouseEnter={() => handleHover(index)
             }
             >
@@ -46,8 +47,23 @@ const Classes = () => {
                 LeaveFrom='opacity-100'
                 LeaveTo='opacity-0'
                 >
-                    i will fade in out
+                <div className='absolute inset-0 flex items-center justify-center'>
+                  <button className='px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700'>Add to Cart</button>
+                </div>
                 </Transition>
+
+                {/*Details */}
+                <div className='px-6 py-2'>
+                  <h3 className="font-semibold mb-1">{cls.name}</h3>
+                  <p className='text-gray-500 text-xs'>Instructor: {cls.instructorName}</p>
+                  <div className='flex items-center justify-between mt-4'>
+                    <span className='text-gray-600 text-xs'>Available Seats: {cls.availableSeats}</span>
+                    <span className='text-green-500 font-semibold'>${cls.price}</span>
+
+                  </div>
+                </div>
+
+                <Link to={`/class/${cls._id}`}><button className='px-4 py-2 mt-4 mb-2 w-full mx-auto text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700'>View</button></Link>
 
 
               </div>
@@ -61,48 +77,7 @@ const Classes = () => {
 
 export default Classes
 
-/*
 
-import React, { useEffect, useState } from 'react';
-import useAxiosFetch from '../../../hooks/useAxiosFetch';
 
-const Classes = () => {
-  const [classes, setClasses] = useState([]);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const axiosFetch = useAxiosFetch();
 
-  const handleHover = (index) => {
-    setHoveredCard(index);
-  };
-
-  useEffect(() => {
-    axiosFetch
-      .get('/classes')
-      .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  console.log(classes);
-
-  return (
-    <div>
-      <div className="mt-20 pt-3">
-        <h1 className="text-4xl font-bold text-center text-primary">Classes</h1>
-      </div>
-
-      <div className="grid grid-cols-3 gap-4">
-        {classes.map((cls, index) => (
-          <div key={cls._id} className="relative h-48" onMouseEnter={() => handleHover(index)} onMouseLeave={() => setHoveredCard(null)}>
-            <img src={cls.image} alt={cls.title} className={`w-full h-full object-cover ${hoveredCard === index ? 'opacity-90' : 'opacity-100'}`} />
-            <div className="absolute bottom-0 left-0 right-0 bg-white p-2">
-              <h2 className="text-lg font-bold">{cls.title}</h2>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Classes;
-*/
+ 

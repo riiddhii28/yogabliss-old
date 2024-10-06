@@ -10,6 +10,7 @@ const Gallery = () => {
         </div>
 
         {/* image conatiner */}
+        {/*
         <div className='md:grid grid-cols-2 items-center justify-center border gap-4'>
             <div className='mb-4 md:mb-0'>
                 <img src={image1} alt="" className='md:h-[720px] w-full mx-auto rounded-sm' />
@@ -30,7 +31,23 @@ const Gallery = () => {
                 </div>
             </div>
         </div>
-    </div>
+        */}
+
+          <div className='grid md:grid-cols-2 gap-4'>
+              <div className='mb-4 md:mb-0'>
+                  <img src={image1} alt="" className='md:h-[600px] w-full mx-auto rounded-sm' />
+              </div>
+
+              <div className='grid grid-cols-2 gap-4'>
+                  <img src={image2} alt="" className='h-[300px] w-full rounded-sm' />
+                  <img src={image2} alt="" className='h-[300px] w-full rounded-sm' />
+                  <img src={image2} alt="" className='h-[300px] w-full rounded-sm' />
+                  <img src={image2} alt="" className='h-[300px] w-full rounded-sm' />
+              </div>
+          </div>
+
+
+      </div>
   )
 }
 
