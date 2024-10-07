@@ -13,7 +13,7 @@ const PopularTeacher = () => {
         }).catch((err) => {console.log(err)})
         }, []);
         
-    console.log(instructors)    
+    //console.log(instructors)    
   return (
     <div className='md:w-[80%] mx-auto my-36'>
         <div>
@@ -30,7 +30,7 @@ const PopularTeacher = () => {
                 {
                     instructors?.slice(0,4).map((instructor, i) => (
                        
-                         <div className='flex dark:text-white hover:-translate-y-2 duration-200 cursor-pointer flex-col shadow-md py-8 px-10 md:px-8 rounded-md'>
+                         <div key={i} className='flex dark:text-white hover:-translate-y-2 duration-200 cursor-pointer flex-col shadow-md py-8 px-10 md:px-8 rounded-md'>
                          <div className='flex-col flex gap-6 md:gap-8'>
                             <img className='rounded-full border-4 border-gray-300 h-24 w-24 mx-auto' src={instructor?.instructor?.photoUrl || `${img}`} alt="" />
 

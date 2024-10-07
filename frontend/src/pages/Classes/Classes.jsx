@@ -1,14 +1,20 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import useAxiosFetch from '../../../hooks/useAxiosFetch';
 import { Transition } from '@headlessui/react'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../utilities/providers/AuthProvider';
 
 
 const Classes = () => {
   const[classes, setClasses]=useState([]);
   const[hoveredCard, setHoveredCard]= useState(null);
   const axiosFetch= useAxiosFetch();
+
+  const {user} =useContext(AuthContext);
+  console.log('Classes Component User:', user);
+
+ 
 
   const handleHover = (index)=> {
     setHoveredCard(index);
@@ -18,7 +24,7 @@ const Classes = () => {
     axiosFetch.get('/classes').then(res => setClasses(res.data)).catch(err => console.log(err))
       }, []);
 
-      console.log(classes)
+     // console.log(classes)
   return (
     <div>
       <div className='mt-20 pt-3'>
